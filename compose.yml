@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  database:
+    image: mysql:latest
+    container_name: database
+    networks:
+      - test_database
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=secret
+    volumes:
+      - /var/lib/docker/volumes/database_data:/var/lib/mysql
+
+  adminer:
+    image: adminer:latest
+    container_name: adminer
+    networks:
+      - test_database
+    ports:
+      - "8080:8080"
+    links:
+      - database:db
+
+  app:
+    image: apache/php:8.2
+    container_name: test
+    networks:
+      - test_app
+      - test_database
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+    environment:
+      - DATABASE_URL=mysql://root:secret@database:3306/test
+    volumes:
+      - .:/app
+    command: php -S 0.0.0.0:8000 -t public
+
+networks:
+  test_app: 
+    driver: bridge
+    name: test_app
+  test_database:
+    driver: bridge
+    name: test_database
