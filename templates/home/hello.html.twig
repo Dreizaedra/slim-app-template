@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<ul>
+    {% for user in res.users %}
+    <li>
+        {{ user.first_name ~ ' ' ~ user.last_name }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

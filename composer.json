@@ -7,10 +7,18 @@
     },
     "authors": [
         {
-            "name": "Louis Arnault"
+            "name": "Louis Arnault",
+            "email": "louisarnault@gmail.com"
         }
     ],
     "require": {
-        "symfony/dotenv": "^7.0"
+        "symfony/dotenv": "^7.0",
+        "slim/slim": "^4.12",
+        "slim/psr7": "^1.6",
+        "php-di/php-di": "^7.0",
+        "symfony/var-dumper": "^7.0",
+        "twig/twig": "^3.8",
+        "illuminate/events": "^10.44",
+        "illuminate/database": "^10.38"
     }
 }

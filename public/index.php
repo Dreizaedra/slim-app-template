@@ -1,6 +1,8 @@
 <?php
 
 use Symfony\Component\Dotenv\Dotenv;
+use Slim\Factory\AppFactory;
+use DI\Container;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -8,9 +10,19 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $dotenv = new Dotenv();
 $dotenv->load(__DIR__ . '/../.env');
 
-// DB connexion
-$pdo = new PDO(
-    $_ENV['DB_DRIVER'] . ':host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD']
-);
+// Setting containers
+$container = new Container();
+require_once __DIR__ . '/../config/containers.php';
+AppFactory::setContainer($container);
 
-echo 'Hello World';
+// Create slim application
+$app = AppFactory::create();
+
+$app->getContainer()->get('database');
+
+// Register routes in app
+require_once __DIR__ . '/../config/routes.php';
+
+$app->addErrorMiddleware(true, true, true);
+
+$app->run();
