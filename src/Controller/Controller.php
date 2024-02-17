@@ -26,8 +26,4 @@ class Controller {
     public function render(string $template, array $data = []) {
         return $this->container->get('twig')->render($template, $data);
     }
-
-    public function getDatabase() {
-        return $this->container->get('database');
-    }
 }
