@@ -5,7 +5,7 @@ services:
     image: mysql:latest
     container_name: database
     networks:
-      - test_database
+      - network_database
     environment:
       - MYSQL_ROOT_USER=root
       - MYSQL_ROOT_PASSWORD=secret
@@ -19,18 +19,18 @@ services:
     image: adminer:latest
     container_name: adminer
     networks:
-      - test_database
+      - network_database
     ports:
       - "8080:8080"
     links:
       - database:db
 
   app:
-    image: apache/php:8.2
-    container_name: test
+    build: .
+    container_name: app
     networks:
-      - test_app
-      - test_database
+      - network_app
+      - network_database
     ports:
       - "8000:8000"
     depends_on:
@@ -40,9 +40,9 @@ services:
     command: php -S 0.0.0.0:8000 -t public
 
 networks:
-  test_app: 
+  network_app: 
     driver: bridge
-    name: test_app
-  test_database:
+    name: network_app
+  network_database:
     driver: bridge
-    name: test_database
+    name: network_database
