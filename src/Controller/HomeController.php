@@ -15,17 +15,4 @@ class HomeController extends Controller {
         ]);
         return $response->withStatus(200);
     }
-
-    public function hello(Request $request, Response $response) {
-        $customer = new Customer();
-        $data = $customer->getAll();
-
-        // die(dump($data));
-        echo $this->render('home/hello.html.twig', [
-            'res' => [
-                'users' => $data
-            ]
-        ]);
-        return $response;
-    }
 }

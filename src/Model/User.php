@@ -4,9 +4,9 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class User extends Model
 {
     public function getAll() {
-        return $this::select('id', 'email', 'first_name', 'last_name')->get();
+        return $this::select('id', 'email', 'password')->get();
     }
 }
