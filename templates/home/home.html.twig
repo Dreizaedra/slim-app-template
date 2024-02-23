@@ -1,9 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1>Hello world!</h1>
-<div>
-    <p>Votre mot de passe est :</p>
-    <p>{{ res.password }}</p>
-</div>
+
+{% if res.status is defined %}
+    <h1>
+        Hello world!
+    </h1>
+    <p>
+        {% if res.status === 'success' %}
+            This is a success!
+        {% else %}
+            {{ 'Error: ' ~ res.error }}
+        {% endif %}
+    </p>
+{% endif %}
+
 {% endblock %}
