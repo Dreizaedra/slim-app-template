@@ -1,5 +1,9 @@
 RewriteEngine On
 RewriteBase /
+
+# Si la requête n'est pas pour un fichier existant
 RewriteCond %{REQUEST_FILENAME} !-f
+# Si la requête n'est pas pour un répertoire existant
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
+# Rediriger vers index.php
+RewriteRule ^ index.php [L,QSA]
