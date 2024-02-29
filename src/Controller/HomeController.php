@@ -3,12 +3,17 @@
 namespace App\Controller;
 
 use Exception;
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
-class HomeController extends Controller {
+final class HomeController extends Controller {
 
-    public function index(Request $request, Response $response) {
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
+    public function index(Request $request, Response $response): Response {
         $res['status'] = 'error';
         try {
             // Your code here

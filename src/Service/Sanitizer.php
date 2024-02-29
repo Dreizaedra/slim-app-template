@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-class Sanitizer {
+final class Sanitizer {
     /**
      * Sanitize user input based on its type
      * @param string $value Input value to sanitize

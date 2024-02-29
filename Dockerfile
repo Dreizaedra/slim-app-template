@@ -2,8 +2,8 @@
 FROM php:8.2-apache
 
 # Installez les dépendances nécessaires, y compris php-gd et ext-zip
-RUN apt update
-RUN apt install -y \    
+RUN apt-get update
+RUN apt-get install -y \
     git \    
     curl \    
     libldap2-dev \    
